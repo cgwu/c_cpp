@@ -12,7 +12,7 @@ void InitBTree(BTreeNode **root){
 // 2. 根据广义表表示的二叉树建立对应的存储结构
 // a(b(c),d(e(f,g),h(,i)))
 void CreateBTree(BTreeNode **root, char *s){
-    BTreeNode ** stack[MaxStackSize];
+    BTreeNode ** stack[MaxStackSize] = {0,};
     int top = -1;
     BTreeNode * pnode = NULL;
     BTreeNode ** pcurrent = root;
@@ -22,16 +22,15 @@ void CreateBTree(BTreeNode **root, char *s){
             case ' ':
                 break;
             case '(':
-                stack[top++] = pcurrent;
+                stack[++top] = pcurrent;
                 pcurrent = & (*pcurrent)->left;
                 break;
             case ')':
                 top--;
                 break;
             case ',':
-                top--;
                 if(top < 0) printf("stack index error.\n");
-                pcurrent = & ((*(stack[top]))->right);
+                pcurrent = & (*stack[top])->right;
                 break;
             default:
                 pnode = malloc(sizeof(BTreeNode));
@@ -81,8 +80,8 @@ void PreOrder(BTreeNode *root){
 
 void InOrder(BTreeNode *root){
     if(root != NULL){
-        PreOrder(root->left);
+        InOrder(root->left);
         printf("%c ",root->elem);
-        PreOrder(root->right);
+        InOrder(root->right);
     }
 }
