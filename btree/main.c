@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include "btree.h"
 int main(){
-    //char str[] ="a(b(c),d(e(f,g),h(,i)))";
-    char str[] = "d(e(f,g),h(,i))";
+    char str[] ="a(b(c),d(e(f,g),h(,i)))";
+    //char str[] = "d(e(f,g),h(,i))";
     //char str[] = "a(b,c)";
     BTreeNode * root;
     InitBTree(&root);
@@ -11,6 +11,8 @@ int main(){
     PreOrder(root);
     printf("\n中序遍历:\n");
     InOrder(root);
+    printf("\n后序遍历:\n");
+    LastOrder(root);
     printf("\n");
 
     ClearBTree(&root);

@@ -36,5 +36,8 @@ void PreOrder(BTreeNode *root);
 
 //中序遍历
 void InOrder(BTreeNode *root);
+
+//后序遍历
+void LastOrder(BTreeNode *root);
 #endif
 

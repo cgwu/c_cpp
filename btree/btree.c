@@ -85,3 +85,11 @@ void InOrder(BTreeNode *root){
         InOrder(root->right);
     }
 }
+
+void LastOrder(BTreeNode *root){
+    if(root != NULL){
+        LastOrder(root->left);
+        LastOrder(root->right);
+        printf("%c ",root->elem);
+    }
+}
