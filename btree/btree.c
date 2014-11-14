@@ -17,7 +17,7 @@ void CreateBTree(BTreeNode **root, char *s){
     BTreeNode * pnode = NULL;
     BTreeNode ** pcurrent = root;
     for(; *s; s++){
-        printf("处理:%c\n",*s);
+        //printf("处理:%c\n",*s);
         switch(*s){
             case ' ':
                 break;
@@ -64,11 +64,25 @@ BTreeNode * FindBTree(BTreeNode *root, ElemType x){
 }
 
 // 6. 求出一棵二叉树的深度并返回
-int BTreeDepth(BTreeNode *root);
+int BTreeDepth(BTreeNode *root){
+    if(root == NULL) return 0;
+    int left = BTreeDepth(root->left);
+    int right = BTreeDepth(root->right);
+    return (left > right ? left: right ) + 1;
+}
 
 // 7. 按照树的一种表示方法输出一棵二叉树,广义表
 void PrintBTree(BTreeNode *root){
-    
+   if(root != NULL){
+        printf("%c",root->elem);
+        if(root->left != NULL || root->right != NULL){
+            printf("(");
+            PrintBTree(root->left);
+            if(root->right) printf(",");
+            PrintBTree(root->right);
+            printf(")");
+        }
+   }
 }
 
 // 8. 清除二叉树中的所有结点，使之变成一棵空树

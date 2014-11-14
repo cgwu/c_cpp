@@ -20,6 +20,10 @@ int main(){
     if(pr == NULL) printf("元素未找到.\n");
     else printf("元素成功找到:%c\n",pr->elem);
     
+    printf("树的深度:%d\n",BTreeDepth(root));
+    printf("树输出为广义表:");
+    PrintBTree(root);
+    printf("\n");
 
     printf("树是否为空(1是;0否):%d\n",IsBTreeEmpty(root));
     ClearBTree(&root);
