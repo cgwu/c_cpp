@@ -35,6 +35,7 @@ obj_dir:
 	$(MKDIR) $(PROJECT_OBJ_DIR)
 
 $(PROJECT_OBJ_DIR)/%.o : $(PROJECT_SRC_DIR)/%.c
+#	echo $< ==> $@  # $<为第一个依赖文件; $@为目标文件
 	$(CC) -c $(CFLAGS) $< -o $@
 
 .PHONY:clean
