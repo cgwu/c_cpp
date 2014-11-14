@@ -44,13 +44,24 @@ void CreateBTree(BTreeNode **root, char *s){
 }
 
 // 3. 判断一棵二叉树是否为空，若是返回1，否则返回0
-int IsBTreeEmpty(BTreeNode *root);
+int IsBTreeEmpty(BTreeNode *root){
+    return root == NULL ? 0 : 1;
+}
 
 // 4. 按照一定次序遍历一棵二叉树，每个结点均要访问一次
 void TraverseBTree(BTreeNode *root);
 
 // 5. 从二叉树查找值为x的结点，若存在返回结点存储位置，否则返回NULL
-ElemType * FindBTree(BTreeNode *root, ElemType x);
+BTreeNode * FindBTree(BTreeNode *root, ElemType x){
+    if(root != NULL){
+        if(root->elem == x) return root;
+        BTreeNode * lr = FindBTree(root->left, x);
+        if(lr != NULL) return lr;
+        lr = FindBTree(root->right, x);
+        if(lr != NULL) return lr;
+    }
+    return NULL;
+}
 
 // 6. 求出一棵二叉树的深度并返回
 int BTreeDepth(BTreeNode *root);

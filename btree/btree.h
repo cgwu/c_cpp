@@ -20,7 +20,7 @@ int IsBTreeEmpty(BTreeNode *root);
 void TraverseBTree(BTreeNode *root);
 
 // 5. 从二叉树查找值为x的结点，若存在返回结点存储位置，否则返回NULL
-ElemType * FindBTree(BTreeNode *root, ElemType x);
+BTreeNode * FindBTree(BTreeNode *root, ElemType x);
 
 // 6. 求出一棵二叉树的深度并返回
 int BTreeDepth(BTreeNode *root);
