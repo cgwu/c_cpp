@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "btree.h"
+#include "util/util.h"
+
 int main(){
     char str[] ="a(b(c),d(e(f,g),h(,i)))";
     //char str[] = "d(e(f,g),h(,i))";
@@ -29,6 +31,10 @@ int main(){
     ClearBTree(&root);
     printf("树已清除.\n");
     printf("树是否为空(1是;0否):%d\n",IsBTreeEmpty(root));
+
+    sayhello("张三");
+    int cu = addint(1,2);
+    printf("addint:%d\n",cu);
 
     printf("done\n");
     return 0;

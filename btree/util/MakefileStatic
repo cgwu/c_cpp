@@ -1,0 +1,33 @@
+############################################################# 
+# Makefile for shared library.
+# 编译静态链接库
+#############################################################
+#set your own environment option
+CC = gcc
+CC_FLAG =
+
+#set your inc and lib
+INC = 
+LIB =
+
+#make target lib and relevant obj 
+PRG = libutil.a
+OBJ = math.o lang.o
+
+#all target
+all:$(PRG)
+
+$(PRG):$(OBJ)
+	ar -cru $@ $(OBJ)
+#	$(CC) -o $@ $(OBJ) $(LIB)
+
+.SUFFIXES: .c .o .cpp
+#old style:相当于 %.o: %.c
+.cpp.o:
+	$(CC) $(CC_FLAG) $(INC) -c $*.cpp -o $*.o
+
+.PRONY:clean
+clean:
+	@echo 移除目标文件...;
+	rm -f $(OBJ) $(PRG)
+
