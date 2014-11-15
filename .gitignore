@@ -1,7 +1,9 @@
 bin
 obj
 *.out
+*.a
 *.o
+*.so
 *.swp
 *~
 
