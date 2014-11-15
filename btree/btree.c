@@ -49,7 +49,7 @@ int IsBTreeEmpty(BTreeNode *root){
 }
 
 // 4. 按照一定次序遍历一棵二叉树，每个结点均要访问一次
-void TraverseBTree(BTreeNode *root);
+//void TraverseBTree(BTreeNode *root);
 
 // 5. 从二叉树查找值为x的结点，若存在返回结点存储位置，否则返回NULL
 BTreeNode * FindBTree(BTreeNode *root, ElemType x){
@@ -118,3 +118,39 @@ void LastOrder(BTreeNode *root){
         printf("%c ",root->elem);
     }
 }
+
+//按层遍历
+typedef struct __BTreeNodeLink{
+    BTreeNode *node;
+    struct __BTreeNodeLink *next;
+} BTreeNodeLink;
+
+void LevelOrder(BTreeNode *root){
+    if(root == NULL) return;
+    BTreeNodeLink *phead = malloc(sizeof(BTreeNodeLink)); //队列头指针
+    phead->node = root;
+    phead->next = NULL;
+    BTreeNodeLink *ptail = phead;   //队列尾指针
+    while(phead != NULL){
+        BTreeNode *pnode = phead->node;
+        printf("%c ",pnode->elem);
+        if(pnode->left){
+            BTreeNodeLink *ptmp = malloc(sizeof(BTreeNodeLink));
+            ptmp->node = pnode->left;
+            ptmp->next = NULL;
+            ptail->next = ptmp;
+            ptail = ptmp;
+        }
+        if(pnode->right){
+            BTreeNodeLink *ptmp = malloc(sizeof(BTreeNodeLink));
+            ptmp->node = pnode->right;
+            ptmp->next = NULL;
+            ptail->next = ptmp;
+            ptail = ptmp;
+        }
+        BTreeNodeLink *ptmp = phead;
+        phead = phead->next;
+        free(ptmp);
+    } 
+}
+
