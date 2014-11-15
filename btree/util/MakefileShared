@@ -1,6 +1,7 @@
 ############################################################# 
 # Makefile for shared library.
 # 编译动态链接库
+# shell中设置动态库路径: export LD_LIBRARY_PATH=./util/
 #############################################################
 #set your own environment option
 CC = gcc
