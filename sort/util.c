@@ -8,3 +8,9 @@ void PrintArray(int arr[], int len){
     }
     printf("]\n");
 }
+
+void Swap(int * a, int * b){
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
