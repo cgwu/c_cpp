@@ -1,5 +1,5 @@
 
-TARGETS := merge.out util.o selection.out heap.out bubble.out
+TARGETS := merge.out util.o selection.out heap.out bubble.out quick.out
 
 all: $(TARGETS)
 
@@ -13,6 +13,8 @@ selection.out: selection.c util.o
 heap.out: heap.c util.o
 	gcc -g -Wall -std=c99 -lm $< util.o -o $@
 bubble.out: bubble.c util.o
+	gcc -g -Wall -std=c99 -lm $< util.o -o $@
+quick.out: quick.c util.o
 	gcc -g -Wall -std=c99 -lm $< util.o -o $@
 
 .PHONY: clean
