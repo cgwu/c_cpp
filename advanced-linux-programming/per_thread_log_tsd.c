@@ -8,7 +8,7 @@ static pthread_key_t thread_log_key;
 
 void write_to_thread_log(const char* message){
 	FILE* thread_log = (FILE*) pthread_getspecific(thread_log_key);
-	fprintf(thread_log, "thread_id[%d]:%s\n",(int)pthread_self(),message);
+	fprintf(thread_log, "pid[%d],thread_id[%d]:%s\n",(int)getpid(),(int)pthread_self(),message);
 }
 void close_thread_log(void* thread_log){
 	fclose((FILE*)thread_log);
