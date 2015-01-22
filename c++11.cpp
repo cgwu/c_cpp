@@ -49,10 +49,15 @@ int main(){
 	auto i = 12345678;
 	auto s = "Hello中国";
 	auto f = 3.14;
-	vector<int> vi {1,2,3,4};
+	vector<int> vi {9,8,7,1,2,3,4};
 	decltype(f) d = 6.28;
+	cout<<"未排序的vector:"<<endl;
 	PrintVector(vi);
-
+	//sort(vi.begin(),vi.end(),greater<int>());
+	sort(vi.begin(),vi.end(),less<int>());
+	cout<<"排序后的vector:"<<endl;
+	PrintVector(vi);
+ 
 	cout<< i << endl;
 	cout<< s << endl;
 	cout<< f << endl;
