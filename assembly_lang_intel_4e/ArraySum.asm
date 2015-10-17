@@ -9,12 +9,13 @@ main PROC
 	mov esi, offset array
 	;mov ecx, arrayLen
 	mov ecx, LENGTHOF array		;方法2，直接取得数组长度
-	xor eax,eax
 	call sumOf
+	mov sum, eax
 	exit
 main endp
 
-sumOf PROC
+sumOf PROC USES esi ecx	;保存和恢复寄存器
+	xor eax,eax
 S1:
 	add eax, [esi]
 	add esi, 4
