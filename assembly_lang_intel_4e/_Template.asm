@@ -6,5 +6,8 @@ include Irvine32.inc
 main PROC
 	
 	exit
-main endp
+main ENDP
+
+
+
 end main
