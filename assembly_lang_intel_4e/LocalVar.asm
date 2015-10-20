@@ -13,7 +13,8 @@ main PROC
 main ENDP
 
 SumOf PROC
-	LOCAL tempSum: DWORD		;局部变量
+	LOCAL tempSum: DWORD, swapFlag: BYTE		;局部变量
+	LOCAL array1[10]: DWORD
 	;push ebp
 	;mov ebp, esp
 	;add esp, -4
