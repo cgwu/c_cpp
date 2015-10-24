@@ -3,6 +3,6 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 				PSTR szCmdLine, int iCmdShow)
 {
-	MessageBox(NULL, TEXT("Hello中国!"),TEXT("HelloMsg"),0);
+	MessageBox(NULL, TEXT("Hello中国!"),TEXT("HelloMsg"),MB_OK);
 	return 0;
 }
