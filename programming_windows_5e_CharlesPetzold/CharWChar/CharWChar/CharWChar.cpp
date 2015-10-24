@@ -11,7 +11,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	printf("Hello中国\n");
 
 	TCHAR ch ='a';
-	TCHAR str[] = _T("Hello中国");		// _T, __T, _TEXT 都是一样的，在UNICODE下被定义为L##x， 如 L"Hello中国"
+	// _T, __T, _TEXT 都是一样的(包含windows.h后TEXT也是一样)，在UNICODE下被定义为L##x， 如 L"Hello中国"
+	//TCHAR str[] = TEXT("Hello中国");
+	TCHAR str[] = _T("Hello中国");
 	_tprintf(_T("ch=%c,str=%ls\n"), ch, str);
 
 	getchar();
