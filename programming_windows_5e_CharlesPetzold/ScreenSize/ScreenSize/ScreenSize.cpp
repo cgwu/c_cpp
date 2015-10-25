@@ -5,7 +5,7 @@
 
 int CDECL MessageBoxPrintf(TCHAR * szCaption, TCHAR * szFormat,...)
 {
-	TCHAR szBuffer[10];
+	TCHAR szBuffer[1024];
 	va_list pArgList;
 	va_start(pArgList, szFormat);
 	//https://msdn.microsoft.com/zh-cn/magazine/d3xd30zz%28de-de%29.aspx
@@ -27,7 +27,12 @@ int APIENTRY _tWinMain(_In_ HINSTANCE hInstance,
                      _In_ LPTSTR    lpCmdLine,
                      _In_ int       nCmdShow)
 {
-	MessageBoxPrintf(_T("提示"), _T("i = %d, str = %s"), 1024, _T("Hello中国"));
+	//MessageBoxPrintf(_T("提示"), _T("i = %d, str = %s"), 1024, _T("Hello中国"));
+	int cxScreen, cyScreen;
+	cxScreen = GetSystemMetrics(SM_CXSCREEN);
+	cyScreen = GetSystemMetrics(SM_CYSCREEN);
+	MessageBoxPrintf(_T("Screen Size"), _T("屏幕宽:%d pixels,高%d pixels."),
+		cxScreen, cyScreen);
 	return 0;
 }
 
