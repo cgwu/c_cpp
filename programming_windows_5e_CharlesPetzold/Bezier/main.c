@@ -1,39 +1,67 @@
 #include <windows.h>
 
+void DrawBezier(HDC hdc, POINT apt[]){
+	PolyBezier(hdc, apt,4);
+	
+	MoveToEx(hdc, apt[0].x, apt[0].y, NULL);
+	LineTo(hdc, apt[1].x, apt[1].y);
+	
+	MoveToEx(hdc, apt[2].x, apt[2].y, NULL);
+	LineTo(hdc, apt[3].x, apt[3].y);
+}
+
 /* This is where all the input to the window goes to */
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) {
-	HDC hdc, hdcNC;
+	static POINT apt[4];
+	HDC hdc;
+	int cxClient, cyClient;
 	PAINTSTRUCT ps;
-	RECT rect;
+	
 	switch(Message) {
-		case WM_CREATE:
-			/*
-			Add -lwinmm to the linker flags
-			*/
-			PlaySound("hellowin.wav", NULL, SND_FILENAME | SND_ASYNC);
+		case WM_SIZE:
+			cxClient = LOWORD(lParam);
+			cyClient = HIWORD(lParam);
+			apt[0].x = cxClient / 4;
+			apt[0].y = cyClient / 2;		//左 0
+			
+			apt[1].x = cxClient / 2;
+			apt[1].y = cyClient / 4;		//上 1
+			
+			apt[2].x = cxClient / 2;
+			apt[2].y = 3 * cyClient / 4;	//下 2
+			
+			apt[3].x = 3 * cxClient / 4;
+			apt[3].y = cyClient / 2;		//右 3
+			
 			return 0;
 			
+		case WM_LBUTTONDOWN:
+		case WM_RBUTTONDOWN:
+		case WM_MOUSEMOVE:
+			if(wParam & MK_LBUTTON || wParam & MK_RBUTTON){
+				hdc = GetDC(hwnd);
+				SelectObject(hdc, GetStockObject(WHITE_PEN));
+				DrawBezier(hdc, apt);		//白色清掉之前的曲线 
+				if(wParam & MK_LBUTTON){
+					apt[1].x = LOWORD(lParam);
+					apt[1].y = HIWORD(lParam);
+				}
+				if(wParam & MK_RBUTTON){
+					apt[2].x = LOWORD(lParam);
+					apt[2].y = HIWORD(lParam);
+				}
+				SelectObject(hdc, GetStockObject(BLACK_PEN));
+				DrawBezier(hdc, apt);		//黑色重画新的曲线 
+				ReleaseDC(hwnd, hdc);
+			}		
+			return 0;
+		
 		case WM_PAINT:
+			InvalidateRect(hwnd, NULL, TRUE);
 			hdc = BeginPaint(hwnd, &ps);
-			GetClientRect(hwnd, &rect);
-			DrawText(hdc, "你好, Windows 98!", -1, &rect,
-				DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+			DrawBezier(hdc, apt);
 			EndPaint(hwnd, &ps);
 			return 0;
-			/*取得设备环境句柄的另一种方法：
-			hdc = GetDC(hwnd);
-			[使用GDI函数]
-			ReleaseDC(hwnd, hdc);*/
-		
-		/*	
-		case WM_NCPAINT:
-			//DefWindowProc(hwnd, Message, wParam, lParam);
-			hdcNC = GetWindowDC(hwnd);
-			char txt[] = "Hello中国";
-			TextOut(hdcNC, 0, 0, txt, strlen(txt));
-			ReleaseDC(hwnd, hdcNC);
-			return 0;
-		*/
 			
 		/* Upon destruction, tell the main thread to stop */
 		case WM_DESTROY: {
@@ -62,8 +90,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	wc.hCursor		 = LoadCursor(NULL, IDC_ARROW);
 	
 	/* White, COLOR_WINDOW is just a #define for a system color, try Ctrl+Clicking it */
-	//wc.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
-	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	wc.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
 	wc.lpszClassName = "WindowClass";
 	wc.hIcon		 = LoadIcon(NULL, IDI_APPLICATION); /* Load a standard icon */
 	wc.hIconSm		 = LoadIcon(NULL, IDI_APPLICATION); /* use the name "A" to use the project icon */
@@ -73,7 +100,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return 0;
 	}
 
-	hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,"WindowClass","Caption",WS_VISIBLE|WS_OVERLAPPEDWINDOW,
+	hwnd = CreateWindowEx(WS_EX_CLIENTEDGE,"WindowClass","贝塞尔曲线实验",WS_VISIBLE|WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, /* x */
 		CW_USEDEFAULT, /* y */
 		640, /* width */
@@ -85,8 +112,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		return 0;
 	}
 
-	ShowWindow(hwnd, nCmdShow);
-	UpdateWindow(hwnd);
 	/*
 		This is the heart of our program where all input is processed and 
 		sent to WndProc. Note that GetMessage blocks code flow until it receives something, so
