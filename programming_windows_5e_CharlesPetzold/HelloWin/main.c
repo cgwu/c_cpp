@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <stdio.h>
 
 /* This is where all the input to the window goes to */
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) {
@@ -10,6 +11,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 			/*
 			Add -lwinmm to the linker flags
 			*/
+			OutputDebugString("´°¿ÚCreate");
+			printf("´°¿ÚCreate");
 			PlaySound("hellowin.wav", NULL, SND_FILENAME | SND_ASYNC);
 			return 0;
 			
