@@ -11,6 +11,12 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 	PAINTSTRUCT ps;
 	
 	switch(Message) {
+		/*
+		case WM_NCHITTEST:
+			return HTCAPTION;		// 按下客户区也能移动 
+			//return (LRESULT)HTNOWHERE;
+		*/
+		
 		case WM_LBUTTONDOWN:
 			iCount = 0;
 			InvalidateRect(hwnd, NULL, TRUE);
