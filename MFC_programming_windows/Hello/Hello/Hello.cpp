@@ -14,6 +14,7 @@ BOOL CMyApp::InitInstance(){
 BEGIN_MESSAGE_MAP(CMainWindow, CFrameWnd)
 	ON_WM_PAINT()
 	ON_WM_CREATE()
+	ON_WM_LBUTTONDOWN()
 END_MESSAGE_MAP()
 
 CMainWindow::CMainWindow(){
@@ -38,4 +39,25 @@ int CMainWindow::OnCreate(LPCREATESTRUCT lpCreateStruct){
 
 	OutputDebugString(_T("CMainWindow::OnCreate called.\n"));
 	return 0;
+}
+
+void CMainWindow::OnLButtonDown(UINT nFlags, CPoint point){
+	CRect rect;
+	GetClientRect(&rect);
+
+	CClientDC dc(this);
+	//CClientDC dc(NULL);		//桌面上的DC
+	//CWindowDC dc(this);		//包含非客户区
+	//dc.SetBkMode(TRANSPARENT);
+	//dc.SetROP2(R2_NOT);
+	//dc.SetROP2(R2_BLACK);
+
+	dc.MoveTo(rect.left, rect.top);
+	dc.LineTo(rect.right, rect.bottom);
+	dc.MoveTo(rect.right, rect.top);
+	dc.LineTo(rect.left, rect.bottom);
+
+	dc.Rectangle(10,10, 200,100);
+	dc.SetMapMode(MM_LOMETRIC);
+	dc.Ellipse(0,0,500,-500);
 }
