@@ -93,4 +93,24 @@ void CMainWindow::OnLButtonDown(UINT nFlags, CPoint point) {
 	CString str;
 	str.Format(_T("宽:%d,高:%d"),cx,cy);
 	SetWindowText(str);
+
+	//线
+	dc.MoveTo(0,0);
+	POINT aPoint[4] = {0,100, 100,100, 100,0, 0,0};
+	dc.PolylineTo(aPoint,4);	//多边形
+
+	CFont font;
+	//font.CreatePointFont(24,_T("Arial"));
+	//font.CreatePointFont(24,_T("Times New Roman"));
+	font.CreatePointFont(24,_T("MS Sans Serif"));
+	dc.SetBkMode(TRANSPARENT);		//背景透明
+	dc.SelectObject(&font);
+	dc.TextOutW(10,20,CString(_T("aaabbb你好,MFC!")));
+
+	CWindowDC winDC(this);
+	//贝塞尔曲线
+	POINT aPoint1[4] = {120,100, 120,200, 250,150, 500, 40};
+	POINT aPoint2[4] = {120,100, 50,350, 250,200, 500, 40};
+	winDC.PolyBezier(aPoint1, 4);
+	winDC.PolyBezier(aPoint2, 4);
 }
