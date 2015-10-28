@@ -26,6 +26,8 @@ BEGIN_MESSAGE_MAP(CCViewDemoView, CScrollView)
 	ON_COMMAND(ID_FILE_PRINT, &CScrollView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CScrollView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CScrollView::OnFilePrintPreview)
+	ON_WM_LBUTTONDOWN()
+	ON_WM_RBUTTONDOWN()
 END_MESSAGE_MAP()
 
 // CCViewDemoView 构造/析构
@@ -112,3 +114,33 @@ CCViewDemoDoc* CCViewDemoView::GetDocument() const // 非调试版本是内联的
 
 
 // CCViewDemoView 消息处理程序
+
+
+void CCViewDemoView::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	CPoint pos = point;
+	CClientDC dc(this);
+	OnPrepareDC(&dc);
+	dc.DPtoLP(&pos);
+
+	CSize size = GetTotalSize();		//获取view的逻辑宽度和高度
+	if(::abs(pos.y) < (size.cy / 2)){
+		MessageBox(_T("点击位置在ScrollView的上半部分"));
+	}
+	else{
+		MessageBox(_T("点击位置在ScrollView的下半部分"));
+	}
+	//CScrollView::OnLButtonDown(nFlags, point);
+}
+
+
+void CCViewDemoView::OnRButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	CPoint pos = GetScrollPosition();	//上下、左右滚动的偏移
+	CString str;
+	str.Format(_T("cx = %d, cy=%d"), pos.x, pos.y);
+	MessageBox(str);
+	//CScrollView::OnRButtonDown(nFlags, point);
+}

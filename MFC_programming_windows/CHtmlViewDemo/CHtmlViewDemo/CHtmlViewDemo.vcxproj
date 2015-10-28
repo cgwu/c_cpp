@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{75EEF630-22E1-482C-A113-43D38B027BC3}</ProjectGuid>
-    <RootNamespace>CViewDemo</RootNamespace>
+    <ProjectGuid>{2A32E6BC-7245-4E4F-8C42-A5006D144E35}</ProjectGuid>
+    <RootNamespace>CHtmlViewDemo</RootNamespace>
     <Keyword>MFCProj</Keyword>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -69,6 +69,9 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <PostBuildEvent>
+      <Command>copy index.html $(TargetDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -101,18 +104,18 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CViewDemo.h" />
-    <ClInclude Include="CViewDemoDoc.h" />
-    <ClInclude Include="CViewDemoView.h" />
+    <ClInclude Include="CHtmlViewDemo.h" />
+    <ClInclude Include="CHtmlViewDemoDoc.h" />
+    <ClInclude Include="CHtmlViewDemoView.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CViewDemo.cpp" />
-    <ClCompile Include="CViewDemoDoc.cpp" />
-    <ClCompile Include="CViewDemoView.cpp" />
+    <ClCompile Include="CHtmlViewDemo.cpp" />
+    <ClCompile Include="CHtmlViewDemoDoc.cpp" />
+    <ClCompile Include="CHtmlViewDemoView.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -120,22 +123,21 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="CViewDemo.rc" />
+    <ResourceCompile Include="CHtmlViewDemo.rc" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\CViewDemo.rc2" />
+    <None Include="index.html">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</DeploymentContent>
+    </None>
+    <None Include="res\CHtmlViewDemo.rc2" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\CViewDemo.ico" />
-    <Image Include="res\CViewDemoDoc.ico" />
+    <Image Include="res\CHtmlViewDemo.ico" />
+    <Image Include="res\CHtmlViewDemoDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
-  <ProjectExtensions>
-    <VisualStudio>
-      <UserProperties RESOURCE_FILE="CViewDemo.rc" />
-    </VisualStudio>
-  </ProjectExtensions>
 </Project>

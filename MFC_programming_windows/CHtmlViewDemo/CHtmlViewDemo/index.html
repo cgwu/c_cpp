@@ -1,0 +1,28 @@
+<HTML>
+<HEAD>
+	<meta charset="utf-8">
+	<META NAME="GENERATOR" Content="Microsoft Visual Studio">
+	<TITLE></TITLE>
+	<script type="text/javascript">
+	function do_click () {
+		alert('clicked');
+	}
+	</script>
+	<style>
+	body{
+		background-color: #008000;
+	}
+	</style>
+</HEAD>
+<BODY>
+
+    <h1>这是CHtmlView测试页面</h1>
+    <button id="btnTest" onclick="do_click()">test click点击测试</button>
+
+<pre>
+项目 -> 属性 -> 配置属性 -> 生成事件 -> 后期生成事件:
+命令行(复制资源文件到输出目录):
+copy index.html $(TargetDir)
+</pre>
+</BODY>
+</HTML>
