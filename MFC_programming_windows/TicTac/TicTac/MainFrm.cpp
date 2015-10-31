@@ -44,7 +44,11 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		TRACE0("未能创建视图窗口\n");
 		return -1;
 	}
-	
+
+	CRect rect(0,0,352,352);
+	CalcWindowRect(&rect);
+	SetWindowPos(NULL,0,0,rect.Width(), rect.Height(),
+		SWP_NOZORDER | SWP_NOMOVE | SWP_NOREDRAW);
 	return 0;
 }
 
