@@ -18,6 +18,7 @@ IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_SETFOCUS()
+	ON_WM_NCMOUSEMOVE()
 END_MESSAGE_MAP()
 
 // CMainFrame 构造/析构
@@ -102,3 +103,12 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 	return CFrameWnd::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
+
+
+void CMainFrame::OnNcMouseMove(UINT nHitTest, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	this->ScreenToClient(&point);
+	TRACE(_T("NcMouseMove:(%d,%d)\n"),point.x, point.y);
+	//CFrameWnd::OnNcMouseMove(nHitTest, point);
+}
