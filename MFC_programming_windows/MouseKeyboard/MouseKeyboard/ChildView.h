@@ -10,6 +10,9 @@
 
 class CChildView : public CWnd
 {
+protected:
+	BOOL m_bMouseOver;
+	CPoint m_ptFrom;
 // ππ‘Ï
 public:
 	CChildView();
@@ -34,5 +37,10 @@ protected:
 	DECLARE_MESSAGE_MAP()
 public:
 	afx_msg LRESULT OnNcHitTest(CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnMouseHover(UINT nFlags, CPoint point);
+	afx_msg void OnMouseLeave();
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 };
 

@@ -44,6 +44,7 @@ protected:
 
 public:
 	afx_msg LRESULT OnNcHitTest(CPoint point);
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
 };
 
 

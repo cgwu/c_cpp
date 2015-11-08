@@ -19,6 +19,7 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
 	ON_WM_SETFOCUS()
 	ON_WM_NCHITTEST()
+	ON_WM_MOUSEMOVE()
 END_MESSAGE_MAP()
 
 // CMainFrame 构造/析构
@@ -109,11 +110,18 @@ BOOL CMainFrame::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERINFO*
 
 LRESULT CMainFrame::OnNcHitTest(CPoint point)
 {
-	// TODO: 在此添加消息处理程序代码和/或调用默认值
-	TRACE(_T("WM_NCHITTEST(%d,%d)\n"),point.x, point.y);
+	TRACE(_T("MainFrame :: WM_NCHITTEST(%d,%d)\n"),point.x, point.y);
 	UINT nHitTest = CFrameWnd::OnNcHitTest(point);
 	if(nHitTest == HTCLIENT){
 		nHitTest = HTCAPTION;
 	}
 	return nHitTest;
+}
+
+
+void CMainFrame::OnMouseMove(UINT nFlags, CPoint point)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	TRACE(_T("CMainFrame MouseMove"));
+	CFrameWnd::OnMouseMove(nFlags, point);
 }
