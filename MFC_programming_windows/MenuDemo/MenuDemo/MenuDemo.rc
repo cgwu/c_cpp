@@ -123,6 +123,12 @@ BEGIN
         MENUITEM SEPARATOR
         MENUITEM "退出(&X)",                      ID_FILE_EXIT_NEW
     END
+    POPUP "颜色(&C)"
+    BEGIN
+        MENUITEM "红",                           ID_COLOR_RED
+        MENUITEM "绿",                           ID_COLOR_GREEN
+        MENUITEM "蓝",                           ID_COLOR_BLUE
+    END
     POPUP "帮助"
     BEGIN
         MENUITEM "关于(&A)",                      ID_APP_ABOUT

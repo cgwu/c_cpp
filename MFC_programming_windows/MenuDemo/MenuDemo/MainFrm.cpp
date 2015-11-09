@@ -20,6 +20,13 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_SETFOCUS()
 	ON_COMMAND(ID_FILE_OPEN_NEW, &CMainFrame::OnFileOpenNew)
 	ON_COMMAND(ID_FILE_EXIT_NEW, &CMainFrame::OnFileExitNew)
+	/*
+	ON_COMMAND(ID_COLOR_RED, &CMainFrame::OnColor)
+	ON_COMMAND(ID_COLOR_GREEN, &CMainFrame::OnColor)
+	ON_COMMAND(ID_COLOR_BLUE, &CMainFrame::OnColor)
+	*/
+	ON_COMMAND_RANGE(ID_COLOR_RED, ID_COLOR_BLUE, &CMainFrame::OnColorRange)
+	ON_WM_SYSCOMMAND()
 END_MESSAGE_MAP()
 
 // CMainFrame 构造/析构
@@ -45,6 +52,10 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		TRACE0("未能创建视图窗口\n");
 		return -1;
 	}
+	// 修改系统菜单
+	CMenu *pSystemMenu = GetSystemMenu(FALSE);
+	pSystemMenu->AppendMenuW(MF_SEPARATOR);
+	pSystemMenu->AppendMenuW(MF_STRING, ID_APP_ABOUT,_T("关于我(&A)"));
 	return 0;
 }
 
@@ -107,4 +118,37 @@ void CMainFrame::OnFileExitNew()
 {
 	// 发送关闭消息
 	PostMessage(WM_CLOSE,0,0);
+}
+
+
+void CMainFrame::OnColor()
+{
+	UINT nID = (UINT)LOWORD(GetCurrentMessage()->wParam);
+	m_nCurrentColor = nID - ID_COLOR_RED;
+	CString str;
+	str.Format(_T("color=%d"),m_nCurrentColor);
+	MessageBox(str);
+}
+
+void CMainFrame::OnColorRange(UINT nID)
+{
+	CMenu *pMenu = GetMenu();
+	pMenu->CheckMenuItem(m_nCurrentColor + ID_COLOR_RED, MF_UNCHECKED);
+	m_nCurrentColor = nID - ID_COLOR_RED;	//新的
+	pMenu->CheckMenuItem(nID, MF_CHECKED);
+
+	CString str;
+	str.Format(_T("color=%d"),m_nCurrentColor);
+	MessageBox(str);
+}
+
+
+void CMainFrame::OnSysCommand(UINT nID, LPARAM lParam)
+{
+	// TODO: 在此添加消息处理程序代码和/或调用默认值
+	if((nID & 0xfff0) == ID_APP_ABOUT){
+		SendMessage(WM_COMMAND,ID_APP_ABOUT,0);
+		return;
+	}
+	CFrameWnd::OnSysCommand(nID, lParam);
 }

@@ -33,6 +33,7 @@ public:
 #endif
 
 	CChildView    m_wndView;
+	UINT m_nCurrentColor;
 
 // 生成的消息映射函数
 protected:
@@ -43,6 +44,9 @@ protected:
 public:
 	afx_msg void OnFileOpenNew();
 	afx_msg void OnFileExitNew();
+	afx_msg void OnColor();
+	afx_msg void OnColorRange(UINT nID);
+	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 };
 
 
