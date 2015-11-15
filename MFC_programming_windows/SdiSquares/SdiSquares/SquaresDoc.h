@@ -51,4 +51,16 @@ public:
 	void SetSquare(int i, int j, COLORREF color);
 	COLORREF GetSquare(int i, int j);
 	COLORREF GetCurrentColor(void);
+	afx_msg void OnColorBlue();
+	afx_msg void OnUpdateColorBlue(CCmdUI *pCmdUI);
+	afx_msg void OnColorCyan();
+	afx_msg void OnUpdateColorCyan(CCmdUI *pCmdUI);
+	afx_msg void OnColorGreen();
+	afx_msg void OnUpdateColorGreen(CCmdUI *pCmdUI);
+	afx_msg void OnColorRed();
+	afx_msg void OnUpdateColorRed(CCmdUI *pCmdUI);
+	afx_msg void OnColorWhite();
+	afx_msg void OnUpdateColorWhite(CCmdUI *pCmdUI);
+	afx_msg void OnColorYellow();
+	afx_msg void OnUpdateColorYellow(CCmdUI *pCmdUI);
 };

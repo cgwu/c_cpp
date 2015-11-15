@@ -22,6 +22,18 @@
 IMPLEMENT_DYNCREATE(CSquaresDoc, CDocument)
 
 BEGIN_MESSAGE_MAP(CSquaresDoc, CDocument)
+	ON_COMMAND(ID_COLOR_BLUE, &CSquaresDoc::OnColorBlue)
+	ON_UPDATE_COMMAND_UI(ID_COLOR_BLUE, &CSquaresDoc::OnUpdateColorBlue)
+	ON_COMMAND(ID_COLOR_CYAN, &CSquaresDoc::OnColorCyan)
+	ON_UPDATE_COMMAND_UI(ID_COLOR_CYAN, &CSquaresDoc::OnUpdateColorCyan)
+	ON_COMMAND(ID_COLOR_GREEN, &CSquaresDoc::OnColorGreen)
+	ON_UPDATE_COMMAND_UI(ID_COLOR_GREEN, &CSquaresDoc::OnUpdateColorGreen)
+	ON_COMMAND(ID_COLOR_RED, &CSquaresDoc::OnColorRed)
+	ON_UPDATE_COMMAND_UI(ID_COLOR_RED, &CSquaresDoc::OnUpdateColorRed)
+	ON_COMMAND(ID_COLOR_WHITE, &CSquaresDoc::OnColorWhite)
+	ON_UPDATE_COMMAND_UI(ID_COLOR_WHITE, &CSquaresDoc::OnUpdateColorWhite)
+	ON_COMMAND(ID_COLOR_YELLOW, &CSquaresDoc::OnColorYellow)
+	ON_UPDATE_COMMAND_UI(ID_COLOR_YELLOW, &CSquaresDoc::OnUpdateColorYellow)
 END_MESSAGE_MAP()
 
 
@@ -65,10 +77,26 @@ void CSquaresDoc::Serialize(CArchive& ar)
 	if (ar.IsStoring())
 	{
 		// TODO: 在此添加存储代码
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				ar<<m_clrGrid[i][j];
+			}
+		}
+		ar<<m_clrCurrentColor;
 	}
 	else
 	{
 		// TODO: 在此添加加载代码
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 4; j++)
+			{
+				ar >> m_clrGrid[i][j];
+			}
+		}
+		ar >> m_clrCurrentColor;
 	}
 }
 
@@ -163,4 +191,88 @@ COLORREF CSquaresDoc::GetSquare(int i, int j)
 COLORREF CSquaresDoc::GetCurrentColor(void)
 {
 	return m_clrCurrentColor;
+}
+
+
+void CSquaresDoc::OnColorBlue()
+{
+	// TODO: 在此添加命令处理程序代码
+	m_clrCurrentColor = RGB(0,0,255);
+}
+
+
+void CSquaresDoc::OnUpdateColorBlue(CCmdUI *pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetRadio(m_clrCurrentColor == RGB(0,0,255));
+}
+
+
+void CSquaresDoc::OnColorCyan()
+{
+	// TODO: 在此添加命令处理程序代码
+	m_clrCurrentColor = RGB(0,255,255);
+}
+
+
+void CSquaresDoc::OnUpdateColorCyan(CCmdUI *pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetRadio(m_clrCurrentColor == RGB(0,255,255));
+}
+
+
+void CSquaresDoc::OnColorGreen()
+{
+	// TODO: 在此添加命令处理程序代码
+	m_clrCurrentColor = RGB(0,255,0);
+}
+
+
+void CSquaresDoc::OnUpdateColorGreen(CCmdUI *pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetRadio(m_clrCurrentColor == RGB(0,255,0));
+}
+
+
+void CSquaresDoc::OnColorRed()
+{
+	// TODO: 在此添加命令处理程序代码
+	m_clrCurrentColor = RGB(255,0,0);
+}
+
+
+void CSquaresDoc::OnUpdateColorRed(CCmdUI *pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetRadio(m_clrCurrentColor == RGB(255,0,0));
+}
+
+
+void CSquaresDoc::OnColorWhite()
+{
+	// TODO: 在此添加命令处理程序代码
+	m_clrCurrentColor = RGB(255,255,255);
+}
+
+
+void CSquaresDoc::OnUpdateColorWhite(CCmdUI *pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetRadio(m_clrCurrentColor == RGB(255,255,255));
+}
+
+
+void CSquaresDoc::OnColorYellow()
+{
+	// TODO: 在此添加命令处理程序代码
+	m_clrCurrentColor = RGB(255,255,0);
+}
+
+
+void CSquaresDoc::OnUpdateColorYellow(CCmdUI *pCmdUI)
+{
+	// TODO: 在此添加命令更新用户界面处理程序代码
+	pCmdUI->SetRadio(m_clrCurrentColor == RGB(255,255,0));
 }
