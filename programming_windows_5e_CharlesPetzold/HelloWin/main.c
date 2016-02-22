@@ -13,7 +13,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam) 
 			*/
 			OutputDebugString("´°¿ÚCreate");
 			printf("´°¿ÚCreate");
-			PlaySound("hellowin.wav", NULL, SND_FILENAME | SND_ASYNC);
+			//PlaySound("hellowin.wav", NULL, SND_FILENAME | SND_ASYNC);
 			return 0;
 			
 		case WM_PAINT:
