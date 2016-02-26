@@ -6,11 +6,11 @@ CC       = gcc.exe
 WINDRES  = windres.exe
 OBJ      = main.o
 LINKOBJ  = main.o
-LIBS     = -L"C:/MinGW/lib" -L"C:/MinGW/mingw32/lib" -L"D:/Lib/boost/boost_1_58_0/stageMinGW/lib" -lboost_regex-mgw48-mt-1_58 -lboost_log_setup-mgw48-mt-1_58 -lboost_log-mgw48-mt-1_58
-INCS     = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/4.8.1/include" -I"D:/Lib/boost/boost_1_58_0"
-CXXINCS  = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/4.8.1/include" -I"C:/MinGW/lib/gcc/mingw32/4.8.1/include/c++" -I"D:/Lib/boost/boost_1_58_0"
+LIBS     = -L"C:/MinGW/lib" -L"C:/MinGW/mingw32/lib" -static-libstdc++ -static-libgcc -L"D:/Lib/boost/boost_1_58_0/stageMinGW/lib" -lboost_regex-mgw48-mt-1_58 -lboost_log_setup-mgw48-mt-1_58 -lboost_log-mgw48-mt-1_58
+INCS     = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/4.9.3/include" -I"D:/Lib/boost/boost_1_58_0"
+CXXINCS  = -I"C:/MinGW/include" -I"C:/MinGW/mingw32/include" -I"C:/MinGW/lib/gcc/mingw32/4.9.3/include" -I"C:/MinGW/lib/gcc/mingw32/4.9.3/include/c++" -I"D:/Lib/boost/boost_1_58_0"
 BIN      = D:/Lib/boost/boost_1_58_0/stageMinGW/lib/Boost_Demo.exe
-CXXFLAGS = $(CXXINCS) -DBOOST_LOG_DYN_LINK
+CXXFLAGS = $(CXXINCS) -DBOOST_ALL_DYN_LINK
 CFLAGS   = $(INCS) 
 RM       = rm.exe -f
 

@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
 	*/
 	cout << "--------------" << endl;
  
- 	
+ 	// 动态库需要定义: -DBOOST_LOG_DYN_LINK  
 	BOOST_LOG_TRIVIAL(trace) << "A trace severity message";
     BOOST_LOG_TRIVIAL(debug) << "A debug severity message";
     BOOST_LOG_TRIVIAL(info) << "An informational severity message";
@@ -34,6 +34,6 @@ int main(int argc, char** argv) {
     BOOST_LOG_TRIVIAL(error) << "An error severity message";
     BOOST_LOG_TRIVIAL(fatal) << "A fatal severity message";
     
-	getchar();
+	//getchar();
 	return 0;
 }
