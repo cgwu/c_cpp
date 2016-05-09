@@ -53,5 +53,12 @@ int main()
 
     my_printf("ssddffcc", "Hello","World", 888, 12345, 5.123,  3.1415926d, 'Y','G');
 
+    // snprintf, vsnprintf
+    const int BUFSIZE = 14;
+    char buf[BUFSIZE];
+    snprintf(buf, BUFSIZE - 1, "str=%s,int=%d\n", "hello中国", 1234);
+    //sprintf(buf, "str=%s,int=%d\n", "hello中国", 1234);
+    fputs(buf, stdout);
+     
     return 0;
 }
