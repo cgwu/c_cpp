@@ -6,9 +6,9 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-
 #include <errno.h>
 #include <stdlib.h>
+#include <arpa/inet.h>
 
 typedef struct sockaddr_in 	sockaddr_in;
 typedef struct sockaddr 	sockaddr;
@@ -49,7 +49,7 @@ int main(int argc, char** argv) {
 	listen(listen_fd, 100);
 	nonblock(listen_fd);
 	epfd = epoll_create(200);
-	evn.events = EPOLLIN|EPOLLET;
+	evn.events = EPOLLIN | EPOLLET;
 	evn.data.fd = listen_fd;
 	epoll_ctl(epfd, EPOLL_CTL_ADD, listen_fd, &evn);
 	static int count;
@@ -64,10 +64,10 @@ int main(int argc, char** argv) {
 			continue;
 		}
 		for(i=0;i<ers;i++) {
-			if(events[i].data.fd = listen_fd) {
+			if(events[i].data.fd == listen_fd) {
 				con_fd = accept(listen_fd, (sockaddr*)&cli, &len);
 				nonblock(con_fd);
-				printf("connect from:%s\n", inet_ntoa(cli.sin_addr));
+				printf("connect from:%s\n", (char*)inet_ntoa(cli.sin_addr));
 				evn.data.fd = con_fd;
 				evn.events = EPOLLIN | EPOLLET;
 				epoll_ctl(epfd, EPOLL_CTL_ADD, con_fd, &evn);

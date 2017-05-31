@@ -1,4 +1,3 @@
-
 #include <sys/epoll.h>  
 #include <netinet/in.h>  
 #include <sys/types.h>          /* See NOTES */  
@@ -7,6 +6,8 @@
 #include <stdio.h>  
 #include <stdlib.h>  
 #include <unistd.h>  
+#include <arpa/inet.h>  
+
 typedef struct sockaddr_in sockaddr_in ;  
 typedef struct sockaddr     sockaddr ;  
   
