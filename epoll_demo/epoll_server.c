@@ -40,6 +40,7 @@ int main(int argc, char** argv) {
 	listen_fd = socket(AF_INET, SOCK_STREAM, 0);
 
 	int yes = 1;
+	// 设置调用closesocket()后，仍可继续重用该socket。调用closesocket()一般不会立即关闭socket，而经历TIME_WAIT的过程。
 	setsockopt(listen_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int));
 
 	if(bind(listen_fd, (sockaddr*)&srv, sizeof(sockaddr)) < 0) {
