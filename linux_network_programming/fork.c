@@ -13,7 +13,7 @@ int main(){
         printf("I'm the parent, child has pid %d\n", pid);
     }
     else{
-        printf("Form fail!\n");
+        printf("Fork fail!\n");
     }
     printf("done\n");
     return 0;
